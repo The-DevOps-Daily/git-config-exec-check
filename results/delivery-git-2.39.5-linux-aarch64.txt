@@ -1,0 +1,7 @@
+git 2.39.5 on Linux aarch64
+original repo                      ran: filter-clean,fsmonitor   
+git clone                          ran: nothing                  
+git clone from a bundle            ran: nothing                  
+tar of the working copy            ran: filter-clean,fsmonitor   
+same tar, owned by another user    ran: nothing                  fatal: detected dubious ownership in repository at '/tmp/tmp.Cf7JArvf1z/other-owner'
+  ...with safe.directory=*         ran: filter-clean,fsmonitor   

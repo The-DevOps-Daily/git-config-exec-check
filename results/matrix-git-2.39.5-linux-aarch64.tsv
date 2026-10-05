@@ -1,0 +1,121 @@
+key	command	ran
+fsmonitor	git status	fsmonitor
+fsmonitor	git status --porcelain	fsmonitor
+fsmonitor	git diff	fsmonitor
+fsmonitor	git diff --no-ext-diff --no-textconv	fsmonitor
+fsmonitor	git log -p -1	no
+fsmonitor	git log --oneline -1	no
+fsmonitor	git show HEAD	no
+fsmonitor	git blame notes.txt	fsmonitor
+fsmonitor	git ls-files	fsmonitor
+fsmonitor	git rev-parse HEAD	no
+fsmonitor	git add -A	fsmonitor
+fsmonitor	git commit -qam wip	fsmonitor
+fsmonitor	git stash	fsmonitor
+fsmonitor	git checkout -- notes.txt	fsmonitor
+fsmonitor	git fetch origin	fsmonitor
+filter-clean	git status	no
+filter-clean	git status --porcelain	no
+filter-clean	git diff	filter-clean
+filter-clean	git diff --no-ext-diff --no-textconv	filter-clean
+filter-clean	git log -p -1	no
+filter-clean	git log --oneline -1	no
+filter-clean	git show HEAD	no
+filter-clean	git blame notes.txt	filter-clean
+filter-clean	git ls-files	no
+filter-clean	git rev-parse HEAD	no
+filter-clean	git add -A	filter-clean
+filter-clean	git commit -qam wip	filter-clean
+filter-clean	git stash	filter-clean
+filter-clean	git checkout -- notes.txt	no
+filter-clean	git fetch origin	no
+filter-smudge	git status	no
+filter-smudge	git status --porcelain	no
+filter-smudge	git diff	no
+filter-smudge	git diff --no-ext-diff --no-textconv	no
+filter-smudge	git log -p -1	no
+filter-smudge	git log --oneline -1	no
+filter-smudge	git show HEAD	no
+filter-smudge	git blame notes.txt	no
+filter-smudge	git ls-files	no
+filter-smudge	git rev-parse HEAD	no
+filter-smudge	git add -A	no
+filter-smudge	git commit -qam wip	no
+filter-smudge	git stash	filter-smudge
+filter-smudge	git checkout -- notes.txt	filter-smudge
+filter-smudge	git fetch origin	no
+textconv	git status	no
+textconv	git status --porcelain	no
+textconv	git diff	textconv
+textconv	git diff --no-ext-diff --no-textconv	no
+textconv	git log -p -1	textconv
+textconv	git log --oneline -1	no
+textconv	git show HEAD	textconv
+textconv	git blame notes.txt	textconv
+textconv	git ls-files	no
+textconv	git rev-parse HEAD	no
+textconv	git add -A	no
+textconv	git commit -qam wip	no
+textconv	git stash	no
+textconv	git checkout -- notes.txt	no
+textconv	git fetch origin	no
+diff-external	git status	no
+diff-external	git status --porcelain	no
+diff-external	git diff	diff-external
+diff-external	git diff --no-ext-diff --no-textconv	no
+diff-external	git log -p -1	no
+diff-external	git log --oneline -1	no
+diff-external	git show HEAD	no
+diff-external	git blame notes.txt	no
+diff-external	git ls-files	no
+diff-external	git rev-parse HEAD	no
+diff-external	git add -A	no
+diff-external	git commit -qam wip	no
+diff-external	git stash	no
+diff-external	git checkout -- notes.txt	no
+diff-external	git fetch origin	no
+hooksPath	git status	hook:post-index-change
+hooksPath	git status --porcelain	hook:post-index-change
+hooksPath	git diff	no
+hooksPath	git diff --no-ext-diff --no-textconv	no
+hooksPath	git log -p -1	no
+hooksPath	git log --oneline -1	no
+hooksPath	git show HEAD	no
+hooksPath	git blame notes.txt	no
+hooksPath	git ls-files	no
+hooksPath	git rev-parse HEAD	no
+hooksPath	git add -A	hook:post-index-change
+hooksPath	git commit -qam wip	hook:post-commit,hook:post-index-change,hook:pre-commit,hook:reference-transaction
+hooksPath	git stash	hook:post-index-change,hook:reference-transaction
+hooksPath	git checkout -- notes.txt	hook:post-checkout,hook:post-index-change
+hooksPath	git fetch origin	no
+sshCommand	git status	no
+sshCommand	git status --porcelain	no
+sshCommand	git diff	no
+sshCommand	git diff --no-ext-diff --no-textconv	no
+sshCommand	git log -p -1	no
+sshCommand	git log --oneline -1	no
+sshCommand	git show HEAD	no
+sshCommand	git blame notes.txt	no
+sshCommand	git ls-files	no
+sshCommand	git rev-parse HEAD	no
+sshCommand	git add -A	no
+sshCommand	git commit -qam wip	no
+sshCommand	git stash	no
+sshCommand	git checkout -- notes.txt	no
+sshCommand	git fetch origin	ssh
+pager	git status	no
+pager	git status --porcelain	no
+pager	git diff	no
+pager	git diff --no-ext-diff --no-textconv	no
+pager	git log -p -1	no
+pager	git log --oneline -1	no
+pager	git show HEAD	no
+pager	git blame notes.txt	no
+pager	git ls-files	no
+pager	git rev-parse HEAD	no
+pager	git add -A	no
+pager	git commit -qam wip	no
+pager	git stash	no
+pager	git checkout -- notes.txt	no
+pager	git fetch origin	no

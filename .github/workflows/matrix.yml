@@ -1,0 +1,34 @@
+name: matrix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/**', '.github/workflows/matrix.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Git version
+        run: git --version
+      - name: Which commands run which config keys
+        run: scripts/matrix.sh && column -t -s $'\t' results/matrix-*.tsv
+      - name: Which delivery paths carry .git/config
+        run: scripts/delivery.sh | tee "results/delivery-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
+      - name: Do the usual flags help
+        run: scripts/overrides.sh | tee "results/overrides-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
+      - name: Audit self-test
+        run: scripts/audit-selftest.sh
+      - uses: actions/upload-artifact@v7
+        with:
+          name: results-${{ matrix.os }}
+          path: results/

@@ -1,0 +1,5 @@
+git 2.39.5 on Linux aarch64
+plain                                                      ran: diff-external,filter-clean,fsmonitor,hook:post-index-change
+diff --no-ext-diff --no-textconv                           ran: filter-clean,fsmonitor,hook:post-index-change
++ -c core.fsmonitor=false -c core.hooksPath=/dev/null      ran: filter-clean
++ -c filter.lab.clean= (needs the driver name)             ran: 
