@@ -1,0 +1,6 @@
+git 2.55.0 on Linux x86_64
+run-command.c:673       trace: run_command: cd <tmp>/r; '<tmp>/hook.sh fsmonitor' 2 1791269092755781654
+run-command.c:673       trace: run_command: cd <tmp>/r; '<tmp>/hook.sh fsmonitor' 1 1791269092755781654
+run-command.c:673       trace: run_command: unset GIT_PREFIX; GIT_PROTOCOL=version=2 'git-upload-pack '\''origin'\'''
+fatal: 'origin' does not appear to be a git repository
+fatal: Could not read from remote repository.

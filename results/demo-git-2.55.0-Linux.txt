@@ -1,0 +1,18 @@
+$ git status --short
+ M notes.txt
+$ cat ../ran.log
+ran: fsmonitor
+ran: fsmonitor
+$ git diff --no-ext-diff --no-textconv --stat
+ notes.txt | 1 +
+ 1 file changed, 1 insertion(+)
+$ cat ../ran.log
+ran: fsmonitor
+ran: fsmonitor
+ran: filter-clean
+ran: filter-clean
+$ audit.sh .; echo "exit $?"
+Repo config in . can run programs:
+file:.git/config  core.fsmonitor    ../hook.sh fsmonitor
+file:.git/config  filter.lab.clean  ../hook.sh filter-clean
+exit 1

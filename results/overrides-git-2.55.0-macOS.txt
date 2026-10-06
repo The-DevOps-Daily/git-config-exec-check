@@ -1,0 +1,6 @@
+git 2.55.0 on Darwin arm64
+plain                                                    exit 0/0  ran: diff-external,filter-clean,fsmonitor,hook:config,hook:dir
+diff --no-ext-diff --no-textconv                         exit 0/0  ran: filter-clean,fsmonitor,hook:config,hook:dir
++ -c core.fsmonitor=false -c core.hooksPath=/dev/null    exit 0/0  ran: filter-clean,hook:config
++ -c filter.lab.clean= (needs the driver name)           exit 0/0  ran: hook:config
++ -c hook.post-index-change.enabled=false (per event)    exit 0/0  ran: 
