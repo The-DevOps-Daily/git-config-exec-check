@@ -15,7 +15,7 @@ common=$(git -C "$repo" rev-parse --path-format=absolute --git-common-dir 2>&1) 
   fail "not a git repository, or git refused it: $common"
 
 # Lowercased keys whose value is a command, a hooks directory, or a file to include.
-exec_keys='^(core\.(fsmonitor|hookspath|sshcommand|pager|editor|askpass|gitproxy|alternaterefscommand)|diff\.external|(diff|filter|merge)\..+\.(textconv|command|clean|smudge|process|driver)|credential(\..+)?\.helper|sequence\.editor|gpg(\..+)?\.program|include\.path|includeif\..+\.path|remote\..+\.(uploadpack|receivepack|vcs)|uploadpack\.packobjectshook|hook\..+\.command|pager\..+|interactive\.difffilter|trailer\..+\.(cmd|command)|alias\..+)$'
+exec_keys='^(core\.(fsmonitor|hookspath|sshcommand|pager|editor|askpass|gitproxy|alternaterefscommand)|diff\.external|(diff|filter|merge)\..+\.(textconv|command|clean|smudge|process|driver)|credential(\..+)?\.helper|sequence\.editor|gpg(\..+)?\.program|include\.path|includeif\..+\.path|remote\..+\.(uploadpack|receivepack|vcs)|uploadpack\.packobjectshook|hook\..*\.command|pager\..+|interactive\.difffilter|trailer\..+\.(cmd|command)|alias\..+)$'
 
 tmp=$(mktemp)
 trap 'rm -f "$tmp"' EXIT
@@ -40,10 +40,13 @@ done < "$tmp"
 
 # Hooks need no config at all: any executable file (or symlink to one) in the hooks directory runs.
 hooks=""
-if [ -d "$common/hooks" ]; then
-  while IFS= read -r f; do
+if [ -e "$common/hooks" ]; then
+  # -H follows the hooks directory itself if it is a symlink.
+  find -H "$common/hooks" -mindepth 1 -maxdepth 1 ! -name '*.sample' -print0 > "$tmp" 2>/dev/null ||
+    fail "could not list $common/hooks"
+  while IFS= read -r -d '' f; do
     if [ -x "$f" ] && [ ! -d "$f" ]; then hooks+="$f"$'\n'; fi
-  done < <(find "$common/hooks" -mindepth 1 -maxdepth 1 ! -name '*.sample' 2>/dev/null)
+  done < "$tmp"
 fi
 
 if [ -n "$hits" ] || [ -n "$hooks" ]; then

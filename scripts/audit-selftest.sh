@@ -38,6 +38,12 @@ check "linked worktree (.git file)" "$work/linked" 1
 make_repo "$work/inc" clean && printf '[core]\n\tfsmonitor = %s fsmonitor\n' "$LAB_HOOK" > "$work/inc-target" &&
   git -C "$work/inc" config include.path "$work/inc-target"
 check "include.path outside .git" "$work/inc" 1
+make_repo "$work/empty-hook-name" clean && git -C "$work/empty-hook-name" config 'hook..event' post-index-change &&
+  git -C "$work/empty-hook-name" config 'hook..command' "$LAB_HOOK hook:empty"
+check "hook with an empty name" "$work/empty-hook-name" 1
+make_repo "$work/hooks-link" clean && mkdir "$work/elsewhere" && printf '#!/bin/sh\n"%s" hook:link\n' "$LAB_HOOK" > "$work/elsewhere/post-index-change" &&
+  chmod +x "$work/elsewhere/post-index-change" && rm -rf "$work/hooks-link/.git/hooks" && ln -s "$work/elsewhere" "$work/hooks-link/.git/hooks"
+check "symlinked hooks directory" "$work/hooks-link" 1
 mkdir "$work/not-a-repo"
 check "not a repo" "$work/not-a-repo" 2
 check "missing directory" "$work/missing" 2
