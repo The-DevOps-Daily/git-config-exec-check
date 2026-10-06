@@ -24,9 +24,9 @@ Write-up: [A poisoned .git/config runs code on `git status`](https://devops-dail
 
 ## Results
 
-Recorded with git 2.39.5 on a Raspberry Pi (Debian 12), and git 2.55.0 on GitHub-hosted `ubuntu-latest` (image ubuntu24 20260927.320.1) and `macos-latest` (macos26 20260907.0351.1) runners ([run 37425474572](https://github.com/The-DevOps-Daily/git-config-exec-check/actions/runs/37425474572)). Files are in `results/`. This is the git 2.55.0 table; Ubuntu and macOS were identical, and git 2.39.5 differed only in the config hook column, because hooks defined in config arrived in git 2.54.
+Recorded with git 2.39.5 on a Raspberry Pi (Debian 12), and git 2.55.0 on GitHub-hosted `ubuntu-latest` (image ubuntu24 20260927.320.1) and `macos-latest` (macos26 20260907.0351.1) runners ([run 37426875468](https://github.com/The-DevOps-Daily/git-config-exec-check/actions/runs/37426875468)). Files are in `results/`. This is the git 2.55.0 table; Ubuntu and macOS were identical, and git 2.39.5 differed only in the config hook column, because hooks defined in config arrived in git 2.54.
 
-A blank cell means "not observed with this fixture", not "can never run". The fixture appends a line to a committed file, so git can see the change from the file size without filtering it. `hooks dir` is the same for `.git/hooks` and `core.hooksPath`. `process` is a `filter.<name>.process` helper that does not speak the protocol, so git reports an error after starting it. Only the `sshCommand` fixture has a remote, and its fetch fails on purpose.
+A blank cell means "not observed with this fixture", not "can never run". The fixture appends a line to a committed file, so git can see the change from the file size without filtering it. `hooks dir` is the same for `.git/hooks` and `core.hooksPath`. `process` is a `filter.<name>.process` helper that does not speak the protocol: git 2.39.5 exited 128 after starting it, git 2.55.0 exited 0. Only the `sshCommand` fixture has a remote, and its fetch fails on purpose.
 
 | Command | fsmonitor | clean | process | smudge | textconv | diff.external | hooks dir | config hook | sshCommand |
 |---|---|---|---|---|---|---|---|---|---|
@@ -59,7 +59,7 @@ diff --no-ext-diff --no-textconv                         exit 0/0  ran: filter-c
 + -c hook.post-index-change.enabled=false (per event)    exit 0/0  ran:
 ```
 
-`core.hooksPath=/dev/null` does not stop a hook defined in config; `hook.<event>.enabled=false` does, for that event, without knowing the hook's name.
+In this fixture, `core.hooksPath=/dev/null` did not stop a hook defined in config, and adding `hook.post-index-change.enabled=false` (documented in git 2.55) did, without knowing the hook's name. Keep `core.hooksPath=/dev/null` as well: the event switch was only tested together with it.
 
 `scripts/delivery.sh`: `git clone` and a clone from a bundle never brought the config or hooks; a `tar` of the working copy always did. On the GitHub-hosted runners `safe.directory` is already `*` (system config on Ubuntu, global config on macOS), so a copy owned by another user still ran everything; with system and global config switched off, git 2.55 refused it like git 2.39 on the Pi.
 

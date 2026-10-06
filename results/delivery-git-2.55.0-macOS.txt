@@ -5,5 +5,5 @@ git clone                              copy ran: nothing  then ran: nothing     
 git clone from a bundle                copy ran: nothing  then ran: nothing                                        exit 0/0 
 tar of the working copy                copy ran: nothing  then ran: filter-clean,fsmonitor,hook:post-index-change  exit 0/0 
 same tar, owned by another user        copy ran: -        then ran: filter-clean,fsmonitor,hook:post-index-change  exit 0/0 
-  ...with no system or global config   copy ran: -        then ran: nothing                                        exit 128/129 fatal: detected dubious ownership in repository at '/private/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/tmp.jn92RPj4sf/other-owner'
+  ...with no system or global config   copy ran: -        then ran: nothing                                        exit 128/129 fatal: detected dubious ownership in repository at '/private/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/tmp.JL1pEGEqWm/other-owner'
   ...with -c safe.directory=*          copy ran: -        then ran: filter-clean,fsmonitor,hook:post-index-change  exit 0/0 

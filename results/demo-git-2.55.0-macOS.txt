@@ -13,6 +13,6 @@ ran: filter-clean
 ran: filter-clean
 $ audit.sh .; echo "exit $?"
 Repo config in . can run programs:
-file:.git/config  core.fsmonitor    ../hook.sh fsmonitor
-file:.git/config  filter.lab.clean  ../hook.sh filter-clean
+file:.git/config  core.fsmonitor    .git/lab-hook.sh fsmonitor
+file:.git/config  filter.lab.clean  .git/lab-hook.sh filter-clean
 exit 1
