@@ -1,0 +1,21 @@
+clean                          exit 0 (want 0) ok
+fsmonitor                      exit 1 (want 1) ok
+filter-clean                   exit 1 (want 1) ok
+filter-smudge                  exit 1 (want 1) ok
+filter-process                 exit 1 (want 1) ok
+textconv                       exit 1 (want 1) ok
+diff-external                  exit 1 (want 1) ok
+hooksPath                      exit 1 (want 1) ok
+hooksDir                       exit 1 (want 1) ok
+configHook                     exit 1 (want 1) ok
+sshCommand                     exit 1 (want 1) ok
+pager                          exit 1 (want 1) ok
+driver name with =             exit 1 (want 1) ok
+shell alias                    exit 1 (want 1) ok
+plain alias (no program)       exit 0 (want 0) ok
+symlinked hook                 exit 1 (want 1) ok
+linked worktree (.git file)    exit 1 (want 1) ok
+include.path outside .git      exit 1 (want 1) ok
+not a repo                     exit 2 (want 2) ok
+missing directory              exit 2 (want 2) ok
+auditing ran no programs

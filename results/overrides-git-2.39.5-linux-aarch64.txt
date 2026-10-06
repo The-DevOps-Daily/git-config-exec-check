@@ -1,5 +1,6 @@
 git 2.39.5 on Linux aarch64
-plain                                                      ran: diff-external,filter-clean,fsmonitor,hook:post-index-change
-diff --no-ext-diff --no-textconv                           ran: filter-clean,fsmonitor,hook:post-index-change
-+ -c core.fsmonitor=false -c core.hooksPath=/dev/null      ran: filter-clean
-+ -c filter.lab.clean= (needs the driver name)             ran: 
+plain                                                    exit 0/0  ran: diff-external,filter-clean,fsmonitor,hook:dir
+diff --no-ext-diff --no-textconv                         exit 0/0  ran: filter-clean,fsmonitor,hook:dir
++ -c core.fsmonitor=false -c core.hooksPath=/dev/null    exit 0/0  ran: filter-clean
++ -c filter.lab.clean= (needs the driver name)           exit 0/0  ran: 
++ -c hook.post-index-change.enabled=false (per event)    exit 0/0  ran: 

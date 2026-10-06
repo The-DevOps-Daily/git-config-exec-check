@@ -26,6 +26,12 @@ jobs:
         run: mkdir -p results && scripts/delivery.sh | tee "results/delivery-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
       - name: Do the usual flags help
         run: scripts/overrides.sh | tee "results/overrides-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
+      - name: Restored-workspace demo
+        run: scripts/demo-restored-workspace.sh | tee "results/demo-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
+      - name: Trace a fetch
+        run: scripts/trace-fetch.sh | tee "results/trace-fetch-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
+      - name: Runner image
+        run: echo "${ImageOS:-unknown} ${ImageVersion:-unknown}" | tee "results/image-${{ runner.os }}.txt"
       - name: Audit self-test
         run: scripts/audit-selftest.sh
       - uses: actions/upload-artifact@v7

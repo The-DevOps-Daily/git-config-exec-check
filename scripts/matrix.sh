@@ -14,7 +14,7 @@ work=$(mktemp -d)
 export LAB_HOOK=$work/hook.sh LAB_LOG=$work/log
 write_hook "$LAB_HOOK"
 
-keys=(fsmonitor filter-clean filter-smudge textconv diff-external hooksPath hooksDir sshCommand pager)
+keys=(fsmonitor filter-clean filter-smudge filter-process textconv diff-external hooksPath hooksDir configHook sshCommand pager)
 cmds=(
   "git status"
   "git status --porcelain"
@@ -33,7 +33,9 @@ cmds=(
   "git fetch origin"
 )
 
-printf 'key\tcommand\tran\n' > "$out"
+# Columns: key, command, the git exit code, and which programs ran (blank cells
+# in the write-up mean "not observed with this fixture", not "can never run").
+printf 'key\tcommand\texit\tran\n' > "$out"
 for key in "${keys[@]}"; do
   make_repo "$work/template-$key" "$key"
   for cmd in "${cmds[@]}"; do
@@ -42,8 +44,9 @@ for key in "${keys[@]}"; do
     # hooksPath points at the template; repoint it at this copy.
     [ "$key" = hooksPath ] && git -C "$work/run" config core.hooksPath "$work/run/.lab-hooks"
     (cd "$work/run" && LAB_CMD="$cmd" bash -c "$cmd" > /dev/null 2>&1 < /dev/null)
+    rc=$?
     ran=$(cut -d' ' -f1 "$LAB_LOG" | sort -u | paste -sd, -)
-    printf '%s\t%s\t%s\n' "$key" "$cmd" "${ran:-no}" >> "$out"
+    printf '%s\t%s\t%s\t%s\n' "$key" "$cmd" "$rc" "${ran:-no}" >> "$out"
   done
 done
 rm -rf "$work"

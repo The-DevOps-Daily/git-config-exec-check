@@ -13,6 +13,7 @@ case $label in
   filter-clean|filter-smudge) cat ;;          # filters pass content through stdin to stdout
   textconv) cat "$1" ;;                       # textconv gets the file path
   fsmonitor) exit 1 ;;                        # non-zero tells git to fall back to a full scan
+  filter-process) exit 1 ;;                   # no protocol handshake: git reports an error after starting it
   ssh) exit 1 ;;                              # pretend the connection failed
 esac
 exit 0
@@ -33,7 +34,7 @@ make_repo() {
     git config user.name lab
     printf 'hello\n' > notes.txt
     case $key in
-      filter-clean|filter-smudge) printf '*.txt filter=lab\n' > .gitattributes ;;
+      filter-clean|filter-smudge|filter-process) printf '*.txt filter=lab\n' > .gitattributes ;;
       textconv) printf '*.txt diff=lab\n' > .gitattributes ;;
     esac
     git add -A
@@ -43,6 +44,7 @@ make_repo() {
       fsmonitor) git config core.fsmonitor "$LAB_HOOK fsmonitor" ;;
       filter-clean) git config filter.lab.clean "$LAB_HOOK filter-clean" ;;
       filter-smudge) git config filter.lab.smudge "$LAB_HOOK filter-smudge" ;;
+      filter-process) git config filter.lab.process "$LAB_HOOK filter-process" ;;
       textconv) git config diff.lab.textconv "$LAB_HOOK textconv" ;;
       diff-external) git config diff.external "$LAB_HOOK diff-external" ;;
       hooksPath)
@@ -59,6 +61,13 @@ make_repo() {
           printf '#!/bin/sh\n"%s" hook:%s\n' "$LAB_HOOK" "$h" > ".git/hooks/$h"
           chmod +x ".git/hooks/$h"
         done
+        ;;
+      configHook)
+        # Hooks defined in config (hook.<name>.event/command, git 2.54 and later).
+        for h in pre-commit post-commit post-checkout reference-transaction post-index-change; do
+          git config --add hook.lab.event "$h"
+        done
+        git config hook.lab.command "$LAB_HOOK hook:config"
         ;;
       sshCommand)
         git config core.sshCommand "$LAB_HOOK ssh"

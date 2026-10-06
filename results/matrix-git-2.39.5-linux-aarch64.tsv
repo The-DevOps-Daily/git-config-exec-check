@@ -1,136 +1,166 @@
-key	command	ran
-fsmonitor	git status	fsmonitor
-fsmonitor	git status --porcelain	fsmonitor
-fsmonitor	git diff	fsmonitor
-fsmonitor	git diff --no-ext-diff --no-textconv	fsmonitor
-fsmonitor	git log -p -1	no
-fsmonitor	git log --oneline -1	no
-fsmonitor	git show HEAD	no
-fsmonitor	git blame notes.txt	fsmonitor
-fsmonitor	git ls-files	fsmonitor
-fsmonitor	git rev-parse HEAD	no
-fsmonitor	git add -A	fsmonitor
-fsmonitor	git commit -qam wip	fsmonitor
-fsmonitor	git stash	fsmonitor
-fsmonitor	git checkout -- notes.txt	fsmonitor
-fsmonitor	git fetch origin	fsmonitor
-filter-clean	git status	no
-filter-clean	git status --porcelain	no
-filter-clean	git diff	filter-clean
-filter-clean	git diff --no-ext-diff --no-textconv	filter-clean
-filter-clean	git log -p -1	no
-filter-clean	git log --oneline -1	no
-filter-clean	git show HEAD	no
-filter-clean	git blame notes.txt	filter-clean
-filter-clean	git ls-files	no
-filter-clean	git rev-parse HEAD	no
-filter-clean	git add -A	filter-clean
-filter-clean	git commit -qam wip	filter-clean
-filter-clean	git stash	filter-clean
-filter-clean	git checkout -- notes.txt	no
-filter-clean	git fetch origin	no
-filter-smudge	git status	no
-filter-smudge	git status --porcelain	no
-filter-smudge	git diff	no
-filter-smudge	git diff --no-ext-diff --no-textconv	no
-filter-smudge	git log -p -1	no
-filter-smudge	git log --oneline -1	no
-filter-smudge	git show HEAD	no
-filter-smudge	git blame notes.txt	no
-filter-smudge	git ls-files	no
-filter-smudge	git rev-parse HEAD	no
-filter-smudge	git add -A	no
-filter-smudge	git commit -qam wip	no
-filter-smudge	git stash	filter-smudge
-filter-smudge	git checkout -- notes.txt	filter-smudge
-filter-smudge	git fetch origin	no
-textconv	git status	no
-textconv	git status --porcelain	no
-textconv	git diff	textconv
-textconv	git diff --no-ext-diff --no-textconv	no
-textconv	git log -p -1	textconv
-textconv	git log --oneline -1	no
-textconv	git show HEAD	textconv
-textconv	git blame notes.txt	textconv
-textconv	git ls-files	no
-textconv	git rev-parse HEAD	no
-textconv	git add -A	no
-textconv	git commit -qam wip	no
-textconv	git stash	no
-textconv	git checkout -- notes.txt	no
-textconv	git fetch origin	no
-diff-external	git status	no
-diff-external	git status --porcelain	no
-diff-external	git diff	diff-external
-diff-external	git diff --no-ext-diff --no-textconv	no
-diff-external	git log -p -1	no
-diff-external	git log --oneline -1	no
-diff-external	git show HEAD	no
-diff-external	git blame notes.txt	no
-diff-external	git ls-files	no
-diff-external	git rev-parse HEAD	no
-diff-external	git add -A	no
-diff-external	git commit -qam wip	no
-diff-external	git stash	no
-diff-external	git checkout -- notes.txt	no
-diff-external	git fetch origin	no
-hooksPath	git status	hook:post-index-change
-hooksPath	git status --porcelain	hook:post-index-change
-hooksPath	git diff	no
-hooksPath	git diff --no-ext-diff --no-textconv	no
-hooksPath	git log -p -1	no
-hooksPath	git log --oneline -1	no
-hooksPath	git show HEAD	no
-hooksPath	git blame notes.txt	no
-hooksPath	git ls-files	no
-hooksPath	git rev-parse HEAD	no
-hooksPath	git add -A	hook:post-index-change
-hooksPath	git commit -qam wip	hook:post-commit,hook:post-index-change,hook:pre-commit,hook:reference-transaction
-hooksPath	git stash	hook:post-index-change,hook:reference-transaction
-hooksPath	git checkout -- notes.txt	hook:post-checkout,hook:post-index-change
-hooksPath	git fetch origin	no
-hooksDir	git status	hook:post-index-change
-hooksDir	git status --porcelain	hook:post-index-change
-hooksDir	git diff	no
-hooksDir	git diff --no-ext-diff --no-textconv	no
-hooksDir	git log -p -1	no
-hooksDir	git log --oneline -1	no
-hooksDir	git show HEAD	no
-hooksDir	git blame notes.txt	no
-hooksDir	git ls-files	no
-hooksDir	git rev-parse HEAD	no
-hooksDir	git add -A	hook:post-index-change
-hooksDir	git commit -qam wip	hook:post-commit,hook:post-index-change,hook:pre-commit,hook:reference-transaction
-hooksDir	git stash	hook:post-index-change,hook:reference-transaction
-hooksDir	git checkout -- notes.txt	hook:post-checkout,hook:post-index-change
-hooksDir	git fetch origin	no
-sshCommand	git status	no
-sshCommand	git status --porcelain	no
-sshCommand	git diff	no
-sshCommand	git diff --no-ext-diff --no-textconv	no
-sshCommand	git log -p -1	no
-sshCommand	git log --oneline -1	no
-sshCommand	git show HEAD	no
-sshCommand	git blame notes.txt	no
-sshCommand	git ls-files	no
-sshCommand	git rev-parse HEAD	no
-sshCommand	git add -A	no
-sshCommand	git commit -qam wip	no
-sshCommand	git stash	no
-sshCommand	git checkout -- notes.txt	no
-sshCommand	git fetch origin	ssh
-pager	git status	no
-pager	git status --porcelain	no
-pager	git diff	no
-pager	git diff --no-ext-diff --no-textconv	no
-pager	git log -p -1	no
-pager	git log --oneline -1	no
-pager	git show HEAD	no
-pager	git blame notes.txt	no
-pager	git ls-files	no
-pager	git rev-parse HEAD	no
-pager	git add -A	no
-pager	git commit -qam wip	no
-pager	git stash	no
-pager	git checkout -- notes.txt	no
-pager	git fetch origin	no
+key	command	exit	ran
+fsmonitor	git status	0	fsmonitor
+fsmonitor	git status --porcelain	0	fsmonitor
+fsmonitor	git diff	0	fsmonitor
+fsmonitor	git diff --no-ext-diff --no-textconv	0	fsmonitor
+fsmonitor	git log -p -1	0	no
+fsmonitor	git log --oneline -1	0	no
+fsmonitor	git show HEAD	0	no
+fsmonitor	git blame notes.txt	0	fsmonitor
+fsmonitor	git ls-files	0	fsmonitor
+fsmonitor	git rev-parse HEAD	0	no
+fsmonitor	git add -A	0	fsmonitor
+fsmonitor	git commit -qam wip	0	fsmonitor
+fsmonitor	git stash	0	fsmonitor
+fsmonitor	git checkout -- notes.txt	0	fsmonitor
+fsmonitor	git fetch origin	128	fsmonitor
+filter-clean	git status	0	no
+filter-clean	git status --porcelain	0	no
+filter-clean	git diff	0	filter-clean
+filter-clean	git diff --no-ext-diff --no-textconv	0	filter-clean
+filter-clean	git log -p -1	0	no
+filter-clean	git log --oneline -1	0	no
+filter-clean	git show HEAD	0	no
+filter-clean	git blame notes.txt	0	filter-clean
+filter-clean	git ls-files	0	no
+filter-clean	git rev-parse HEAD	0	no
+filter-clean	git add -A	0	filter-clean
+filter-clean	git commit -qam wip	0	filter-clean
+filter-clean	git stash	0	filter-clean
+filter-clean	git checkout -- notes.txt	0	no
+filter-clean	git fetch origin	128	no
+filter-smudge	git status	0	no
+filter-smudge	git status --porcelain	0	no
+filter-smudge	git diff	0	no
+filter-smudge	git diff --no-ext-diff --no-textconv	0	no
+filter-smudge	git log -p -1	0	no
+filter-smudge	git log --oneline -1	0	no
+filter-smudge	git show HEAD	0	no
+filter-smudge	git blame notes.txt	0	no
+filter-smudge	git ls-files	0	no
+filter-smudge	git rev-parse HEAD	0	no
+filter-smudge	git add -A	0	no
+filter-smudge	git commit -qam wip	0	no
+filter-smudge	git stash	0	filter-smudge
+filter-smudge	git checkout -- notes.txt	0	filter-smudge
+filter-smudge	git fetch origin	128	no
+filter-process	git status	0	no
+filter-process	git status --porcelain	0	no
+filter-process	git diff	128	filter-process
+filter-process	git diff --no-ext-diff --no-textconv	128	filter-process
+filter-process	git log -p -1	0	no
+filter-process	git log --oneline -1	0	no
+filter-process	git show HEAD	0	no
+filter-process	git blame notes.txt	128	filter-process
+filter-process	git ls-files	0	no
+filter-process	git rev-parse HEAD	0	no
+filter-process	git add -A	128	filter-process
+filter-process	git commit -qam wip	128	filter-process
+filter-process	git stash	1	filter-process
+filter-process	git checkout -- notes.txt	128	filter-process
+filter-process	git fetch origin	128	no
+textconv	git status	0	no
+textconv	git status --porcelain	0	no
+textconv	git diff	0	textconv
+textconv	git diff --no-ext-diff --no-textconv	0	no
+textconv	git log -p -1	0	textconv
+textconv	git log --oneline -1	0	no
+textconv	git show HEAD	0	textconv
+textconv	git blame notes.txt	0	textconv
+textconv	git ls-files	0	no
+textconv	git rev-parse HEAD	0	no
+textconv	git add -A	0	no
+textconv	git commit -qam wip	0	no
+textconv	git stash	0	no
+textconv	git checkout -- notes.txt	0	no
+textconv	git fetch origin	128	no
+diff-external	git status	0	no
+diff-external	git status --porcelain	0	no
+diff-external	git diff	0	diff-external
+diff-external	git diff --no-ext-diff --no-textconv	0	no
+diff-external	git log -p -1	0	no
+diff-external	git log --oneline -1	0	no
+diff-external	git show HEAD	0	no
+diff-external	git blame notes.txt	0	no
+diff-external	git ls-files	0	no
+diff-external	git rev-parse HEAD	0	no
+diff-external	git add -A	0	no
+diff-external	git commit -qam wip	0	no
+diff-external	git stash	0	no
+diff-external	git checkout -- notes.txt	0	no
+diff-external	git fetch origin	128	no
+hooksPath	git status	0	hook:post-index-change
+hooksPath	git status --porcelain	0	hook:post-index-change
+hooksPath	git diff	0	no
+hooksPath	git diff --no-ext-diff --no-textconv	0	no
+hooksPath	git log -p -1	0	no
+hooksPath	git log --oneline -1	0	no
+hooksPath	git show HEAD	0	no
+hooksPath	git blame notes.txt	0	no
+hooksPath	git ls-files	0	no
+hooksPath	git rev-parse HEAD	0	no
+hooksPath	git add -A	0	hook:post-index-change
+hooksPath	git commit -qam wip	0	hook:post-commit,hook:post-index-change,hook:pre-commit,hook:reference-transaction
+hooksPath	git stash	0	hook:post-index-change,hook:reference-transaction
+hooksPath	git checkout -- notes.txt	0	hook:post-checkout,hook:post-index-change
+hooksPath	git fetch origin	128	no
+hooksDir	git status	0	hook:post-index-change
+hooksDir	git status --porcelain	0	hook:post-index-change
+hooksDir	git diff	0	no
+hooksDir	git diff --no-ext-diff --no-textconv	0	no
+hooksDir	git log -p -1	0	no
+hooksDir	git log --oneline -1	0	no
+hooksDir	git show HEAD	0	no
+hooksDir	git blame notes.txt	0	no
+hooksDir	git ls-files	0	no
+hooksDir	git rev-parse HEAD	0	no
+hooksDir	git add -A	0	hook:post-index-change
+hooksDir	git commit -qam wip	0	hook:post-commit,hook:post-index-change,hook:pre-commit,hook:reference-transaction
+hooksDir	git stash	0	hook:post-index-change,hook:reference-transaction
+hooksDir	git checkout -- notes.txt	0	hook:post-checkout,hook:post-index-change
+hooksDir	git fetch origin	128	no
+configHook	git status	0	no
+configHook	git status --porcelain	0	no
+configHook	git diff	0	no
+configHook	git diff --no-ext-diff --no-textconv	0	no
+configHook	git log -p -1	0	no
+configHook	git log --oneline -1	0	no
+configHook	git show HEAD	0	no
+configHook	git blame notes.txt	0	no
+configHook	git ls-files	0	no
+configHook	git rev-parse HEAD	0	no
+configHook	git add -A	0	no
+configHook	git commit -qam wip	0	no
+configHook	git stash	0	no
+configHook	git checkout -- notes.txt	0	no
+configHook	git fetch origin	128	no
+sshCommand	git status	0	no
+sshCommand	git status --porcelain	0	no
+sshCommand	git diff	0	no
+sshCommand	git diff --no-ext-diff --no-textconv	0	no
+sshCommand	git log -p -1	0	no
+sshCommand	git log --oneline -1	0	no
+sshCommand	git show HEAD	0	no
+sshCommand	git blame notes.txt	0	no
+sshCommand	git ls-files	0	no
+sshCommand	git rev-parse HEAD	0	no
+sshCommand	git add -A	0	no
+sshCommand	git commit -qam wip	0	no
+sshCommand	git stash	0	no
+sshCommand	git checkout -- notes.txt	0	no
+sshCommand	git fetch origin	128	ssh
+pager	git status	0	no
+pager	git status --porcelain	0	no
+pager	git diff	0	no
+pager	git diff --no-ext-diff --no-textconv	0	no
+pager	git log -p -1	0	no
+pager	git log --oneline -1	0	no
+pager	git show HEAD	0	no
+pager	git blame notes.txt	0	no
+pager	git ls-files	0	no
+pager	git rev-parse HEAD	0	no
+pager	git add -A	0	no
+pager	git commit -qam wip	0	no
+pager	git stash	0	no
+pager	git checkout -- notes.txt	0	no
+pager	git fetch origin	128	no
