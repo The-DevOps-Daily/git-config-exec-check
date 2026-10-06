@@ -22,10 +22,12 @@ probe() { # probe <label> <dir> [git -c args...]
   err=$(cd "$dir" && git "$@" status --porcelain 2>&1 >/dev/null; git "$@" diff 2>&1 >/dev/null)
   local ran
   ran=$(cut -d' ' -f1 "$LAB_LOG" | sort -u | paste -sd, -)
-  printf '%-34s ran: %-24s %s\n' "$label" "${ran:-nothing}" "$(echo "$err" | head -1)"
+  printf '%-38s ran: %-24s %s\n' "$label" "${ran:-nothing}" "$(echo "$err" | head -1)"
 }
 
 echo "git $(git --version | awk '{print $3}') on $(uname -sm)"
+sd=$(git config --show-origin --get-all safe.directory 2>/dev/null | tr '\t' ' ' | paste -sd';' -)
+echo "safe.directory already set on this machine: ${sd:-no}"
 probe "original repo" "$work/src"
 
 git clone -q "$work/src" "$work/clone" 2>/dev/null
@@ -44,6 +46,8 @@ if sudo -n true 2>/dev/null; then
   sudo chown -R nobody "$work/other-owner"
   sudo chmod -R a+rwX "$work/other-owner"
   probe "same tar, owned by another user" "$work/other-owner"
+  GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null \
+    probe "  ...with no system or global config" "$work/other-owner"
   probe "  ...with safe.directory=*" "$work/other-owner" -c safe.directory='*'
   sudo rm -rf "$work/other-owner"
 else
