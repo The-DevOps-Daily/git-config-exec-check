@@ -53,6 +53,13 @@ make_repo() {
         done
         git config core.hooksPath "$dir/.lab-hooks"
         ;;
+      hooksDir)
+        # No config key at all: hooks placed straight in .git/hooks.
+        for h in pre-commit post-commit post-checkout reference-transaction post-index-change; do
+          printf '#!/bin/sh\n"%s" hook:%s\n' "$LAB_HOOK" "$h" > ".git/hooks/$h"
+          chmod +x ".git/hooks/$h"
+        done
+        ;;
       sshCommand)
         git config core.sshCommand "$LAB_HOOK ssh"
         git remote add origin ssh://git@example.invalid/lab.git

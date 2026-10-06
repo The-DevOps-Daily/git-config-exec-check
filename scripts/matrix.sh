@@ -14,7 +14,7 @@ work=$(mktemp -d)
 export LAB_HOOK=$work/hook.sh LAB_LOG=$work/log
 write_hook "$LAB_HOOK"
 
-keys=(fsmonitor filter-clean filter-smudge textconv diff-external hooksPath sshCommand pager)
+keys=(fsmonitor filter-clean filter-smudge textconv diff-external hooksPath hooksDir sshCommand pager)
 cmds=(
   "git status"
   "git status --porcelain"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Which ways of getting a repo onto a machine also bring its .git/config?
-# Builds one repo with core.fsmonitor and a clean filter set, moves it four
+# Builds one repo with core.fsmonitor, a clean filter and a hook in .git/hooks, moves it four
 # ways, then runs `git status` and `git diff` in each copy.
 # The ownership step needs passwordless sudo; it is skipped without it.
 set -u
@@ -13,6 +13,8 @@ write_hook "$LAB_HOOK"
 
 make_repo "$work/src" filter-clean
 git -C "$work/src" config core.fsmonitor "$LAB_HOOK fsmonitor"
+printf '#!/bin/sh\n"%s" hook:post-index-change\n' "$LAB_HOOK" > "$work/src/.git/hooks/post-index-change"
+chmod +x "$work/src/.git/hooks/post-index-change"
 
 probe() { # probe <label> <dir> [git -c args...]
   local label=$1 dir=$2
@@ -22,7 +24,7 @@ probe() { # probe <label> <dir> [git -c args...]
   err=$(cd "$dir" && git "$@" status --porcelain 2>&1 >/dev/null; git "$@" diff 2>&1 >/dev/null)
   local ran
   ran=$(cut -d' ' -f1 "$LAB_LOG" | sort -u | paste -sd, -)
-  printf '%-38s ran: %-24s %s\n' "$label" "${ran:-nothing}" "$(echo "$err" | head -1)"
+  printf '%-38s ran: %-46s %s\n' "$label" "${ran:-nothing}" "$(echo "$err" | head -1)"
 }
 
 echo "git $(git --version | awk '{print $3}') on $(uname -sm)"

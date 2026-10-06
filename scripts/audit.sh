@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# audit.sh [repo]: list repo-level git config that can make git run a program.
+# audit.sh [repo]: list repo-level git config and hooks that can make git run a program.
 # Exits 1 if it finds any, so it can gate a CI step or an agent wrapper.
 # It only runs `git config`, which reads config files and nothing else.
 set -u
@@ -17,9 +17,21 @@ hits=$(git -C "$repo" config --list --includes --show-scope --show-origin 2>/dev
       if (key ~ re) printf "%s\t%s\t%s\n", $2, kv[1], val
     }')
 
-if [ -n "$hits" ]; then
-  echo "Repo config in $repo can run programs:"
-  echo "$hits" | column -t -s$'\t'
+# Hooks need no config at all: any executable file in .git/hooks runs.
+hooks=""
+if [ -d "$repo/.git/hooks" ]; then
+  hooks=$(find "$repo/.git/hooks" -type f -perm -u+x ! -name '*.sample' 2>/dev/null)
+fi
+
+if [ -n "$hits" ] || [ -n "$hooks" ]; then
+  if [ -n "$hits" ]; then
+    echo "Repo config in $repo can run programs:"
+    echo "$hits" | column -t -s$'\t'
+  fi
+  if [ -n "$hooks" ]; then
+    echo "Executable hooks in $repo/.git/hooks:"
+    echo "$hooks" | sed 's/^/  /'
+  fi
   exit 1
 fi
-echo "No program-running keys in the repo config of $repo"
+echo "No program-running keys or hooks in the repo config of $repo"

@@ -1,0 +1,9 @@
+git 2.39.5 on Linux aarch64
+safe.directory already set on this machine: no
+original repo                          ran: filter-clean,fsmonitor,hook:post-index-change  
+git clone                              ran: nothing                                        
+git clone from a bundle                ran: nothing                                        
+tar of the working copy                ran: filter-clean,fsmonitor,hook:post-index-change  
+same tar, owned by another user        ran: nothing                                        fatal: detected dubious ownership in repository at '/tmp/tmp.xyNgJZvYLJ/other-owner'
+  ...with no system or global config   ran: nothing                                        fatal: detected dubious ownership in repository at '/tmp/tmp.xyNgJZvYLJ/other-owner'
+  ...with safe.directory=*             ran: filter-clean,fsmonitor,hook:post-index-change  

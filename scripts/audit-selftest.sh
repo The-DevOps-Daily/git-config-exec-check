@@ -9,7 +9,7 @@ export LAB_HOOK=$work/hook.sh LAB_LOG=$work/log
 write_hook "$LAB_HOOK"
 : > "$LAB_LOG"
 fail=0
-for key in clean fsmonitor filter-clean filter-smudge textconv diff-external hooksPath sshCommand pager; do
+for key in clean fsmonitor filter-clean filter-smudge textconv diff-external hooksPath hooksDir sshCommand pager; do
   make_repo "$work/$key" "$key"
   "$here/audit.sh" "$work/$key" > /dev/null; rc=$?
   want=1; [ "$key" = clean ] && want=0
