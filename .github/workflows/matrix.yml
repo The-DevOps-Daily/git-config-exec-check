@@ -23,7 +23,7 @@ jobs:
       - name: Which commands run which config keys
         run: scripts/matrix.sh && column -t -s $'\t' results/matrix-*.tsv
       - name: Which delivery paths carry .git/config
-        run: scripts/delivery.sh | tee "results/delivery-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
+        run: mkdir -p results && scripts/delivery.sh | tee "results/delivery-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
       - name: Do the usual flags help
         run: scripts/overrides.sh | tee "results/overrides-git-$(git --version | awk '{print $3}')-${{ runner.os }}.txt"
       - name: Audit self-test

@@ -9,6 +9,7 @@ here=$(cd "$(dirname "$0")" && pwd)
 version=$(git --version | awk '{print $3}')
 os=$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)
 out=${1:-$here/../results/matrix-git-$version-$os.tsv}
+mkdir -p "$(dirname "$out")"
 work=$(mktemp -d)
 export LAB_HOOK=$work/hook.sh LAB_LOG=$work/log
 write_hook "$LAB_HOOK"
