@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # audit.sh [repo]: list repo-level git config and hooks that can make git run a program.
 # Exits 1 if it finds any, so it can gate a CI step or an agent wrapper.
-# It only runs `git config`, which reads config files and nothing else.
+# It only runs `git config` and `find`, which read files and run nothing else.
 set -u
 repo=${1:-.}
 
